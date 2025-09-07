@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<body style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-9">
+                <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(230, 240, 250, 0.9)); border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 87, 183, 0.3); backdrop-filter: blur(4px);">
+                    <h2 class="text-center mb-3" style="color: #003087; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">Add New Publisher</h2>
+<a href="{% url 'author' %}" style="text-decoration: none; margin-bottom:-20px;">
+    <div style="display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: #003087; font-size: 18px; cursor: pointer;  transition: all 0.3s ease; color: white;"
+         onmouseover="this.children[1].style.transform='translateX(5px)'"
+         onmouseout="this.children[1].style.transform='translateX(0)'">
+        <p style="margin: 0; color: white; font-weight: bold;">Author</p>
+        <span style="margin-left: 8px; transition: transform 0.3s ease; font-size: 22px; font-weight: bold; color: white;">➜</span>
+    </div>
+</a>
+<br>
+
+
+                    <form method="POST" action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="id_name" class="form-label" style="color: #003087; font-weight: 500;">Publisher Name</label>
+                                <input type="text" id="id_name" name="pname" maxlength="50" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_city" class="form-label" style="color: #003087; font-weight: 500;">City</label>
+                                <select id="id_city" name="city" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                                    <option value="" disabled selected>Select a city</option>
+                                    <option value="New York">New York</option>
+                                    <option value="London">London</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Tokyo">Tokyo</option>
+                                    <option value="Sydney">Sydney</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_state" class="form-label" style="color: #003087; font-weight: 500;">State</label>
+                                <select id="id_state" name="state" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                                    <option value="" disabled selected>Select a state</option>
+                                    <option value="New York">New York</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="California">California</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Victoria">Victoria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_country" class="form-label" style="color: #003087; font-weight: 500;">Country</label>
+                                <select id="id_country" name="country" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                                    <option value="" disabled selected>Select a country</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UK">UK</option>
+                                    <option value="India">India</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Australia">Australia</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_website" class="form-label" style="color: #003087; font-weight: 500;">Website</label>
+                                <input type="url" id="id_website" name="website" maxlength="2085" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_established_year" class="form-label" style="color: #003087; font-weight: 500;">Established Year</label>
+                                <input type="number" id="id_established_year" name="established_year" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_contact_number" class="form-label" style="color: #003087; font-weight: 500;">Contact Number</label>
+                                <input type="text" id="id_contact_number" name="contact_number" maxlength="15" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_address" class="form-label" style="color: #003087; font-weight: 500;">Address</label>
+                                <textarea id="id_address" name="address" maxlength="255" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; min-height: 80px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';"></textarea>
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-center align-items-center form-check">
+                                <input type="checkbox" id="id_is_active" name="is_active" class="form-check-input me-2" checked style="width: 18px; height: 18px; accent-color: #0057b7;">
+                                <label for="id_is_active" class="form-check-label" style="color: #003087; font-weight: 500;">Is Active</label>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn w-100" style="background: linear-gradient(90deg, #0057b7, #00b7eb); color: #ffffff; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Submit</button>
+                            </div>
+             
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+
+
+
+{% endblock %}

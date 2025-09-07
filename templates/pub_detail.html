@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #bae6fd, #dbeafe);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            animation: backgroundFade 1.5s ease-in-out;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            margin: 20px auto;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideIn 1s ease-in-out forwards 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1em;
+            color: #1f2937;
+        }
+
+        th {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: rowSlideIn 0.5s ease-in-out forwards;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        tr:nth-child(1) { animation-delay: 0.5s; }
+        tr:nth-child(2) { animation-delay: 0.6s; }
+        tr:nth-child(3) { animation-delay: 0.7s; }
+        tr:nth-child(4) { animation-delay: 0.8s; }
+        tr:nth-child(5) { animation-delay: 0.9s; }
+
+        tr:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes rowSlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes backgroundFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Publisher's Books</h1>
+        <table>
+            <tr>
+                <th>Publisher Name</th>
+                <th>List of Books</th>
+            </tr>
+            {% for i in pub_detail %}
+            <tr>
+                <td>{{ i.publisher_id.name }}</td>
+                <td>{{ i.title }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+
+<h1>List of Books Published by a Particular Publisher</h1>
+<br>
+<table>
+<tr>
+   <th style="border: 2px solid black">Publisher Name </th>
+   <th style="border: 2px solid black">List Of Books </th>
+</tr>
+
+
+{% for i in pub_detail %}
+<tr>
+<td style="border: 2px solid black">   {{i.publisher_id.name}}</td>
+<td style="border: 2px solid black">     {{i.title}}</td>
+</tr>
+{% endfor %}
+</table>
+
+
+{% endblock %} {% endcomment %}

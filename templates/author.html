@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Author</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body style="background-image: url('https://images.pexels.com/photos/2041540/pexels-photo-2041540.jpeg?auto=compress&cs=tinysrgb&w=2070'); background-size: cover; background-position: center; background-attachment: fixed; font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-9">
+                <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(230, 245, 255, 0.9)); border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 87, 183, 0.3); backdrop-filter: blur(4px);">
+                    <h2 class="text-center mb-3" style="color: #003087; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">Add New Author</h2>
+                   
+{% comment %} <a href="{% url 'auth_det' %}" style="text-decoration: none;">
+    <div style="display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: #003087; font-size: 18px; cursor: pointer; transition: all 0.3s ease; color: white;"
+         onmouseover="this.children[1].style.transform='translateX(5px)'"
+         onmouseout="this.children[1].style.transform='translateX(0)'">
+        <p style="margin: 0; color: white; font-weight: bold;">Pub Details</p>
+        <span style="margin-left: 8px; transition: transform 0.3s ease; font-size: 20px; font-weight: bold; color: white;">→</span>
+    </div>
+</a> {% endcomment %}
+
+<a href="{% url 'auth_det' %}" style="text-decoration: none;">
+    <div style="display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: #003087; font-size: 18px; cursor: pointer; transition: all 0.3s ease; color: white;"
+         onmouseover="this.children[1].style.transform='translateX(5px)'"
+         onmouseout="this.children[1].style.transform='translateX(0)'">
+        <p style="margin: 0; color: white; font-weight: bold;">Author Details</p>
+        <span style="margin-left: 8px; transition: transform 0.3s ease; font-size: 22px; font-weight: bold; color: white;">➜</span>
+    </div>
+</a>
+
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'author' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="id_salutation" class="form-label" style="color: #003087; font-weight: 500;">Salutation</label>
+                                <select id="id_salutation" name="salutation" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                                    <option value="" disabled selected>Select salutation</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Ms">Ms</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_first_name" class="form-label" style="color: #003087; font-weight: 500;">First Name</label>
+                                <input type="text" id="id_first_name" name="first_name" maxlength="50" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_last_name" class="form-label" style="color: #003087; font-weight: 500;">Last Name</label>
+                                <input type="text" id="id_last_name" name="last_name" maxlength="50" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_email" class="form-label" style="color: #003087; font-weight: 500;">Email</label>
+                                <input type="email" id="id_email" name="email" maxlength="50" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_birth_date" class="form-label" style="color: #003087; font-weight: 500;">Birth Date</label>
+                                <input type="date" id="id_birth_date" name="birth_date" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_bio" class="form-label" style="color: #003087; font-weight: 500;">Bio</label>
+                                <textarea id="id_bio" name="bio" maxlength="500" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; min-height: 80px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_profile_picture" class="form-label" style="color: #003087; font-weight: 500;">Profile Picture</label>
+                                <input type="file" id="id_profile_picture" name="profile_picture" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn w-100" style="background: linear-gradient(90deg, #0057b7, #00b7eb); color: #ffffff; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s, background 0.5s;" onmouseover="this.style.background='radial-gradient(circle, #00b7eb, #003087)'; this.style.boxShadow='0 5px 25px rgba(0, 48, 135, 0.7)'; this.style.filter='brightness(1.4)';" onmouseout="this.style.background='linear-gradient(90deg, #0057b7, #00b7eb)'; this.style.boxShadow='none'; this.style.filter='brightness(1)';">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<div>
+
+</div> 
+</body>
+</html>
+
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<body style="background-image: url('https://images.pexels.com/photos/1290141/pexels-photo-1290141.jpeg?auto=compress&cs=tinysrgb&w=600'); background-size: cover; background-position: center; background-attachment: fixed; font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-8">
+                <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(230, 245, 255, 0.9)); border-radius: 12px; padding: 10px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 87, 183, 0.3); backdrop-filter: blur(4px);">
+                    <h2 class="text-center mb-2" style="color: #003087; font-size:38px; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">Add New Book</h2>
+
+<a href="{% url 'all_books' %}" style="text-decoration: none;">
+    <div style="display: inline-flex;margin:5px; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: #003087; font-size: 18px; cursor: pointer; transition: all 0.3s ease; color: white;"
+         onmouseover="this.children[1].style.transform='translateX(5px)'"
+         onmouseout="this.children[1].style.transform='translateX(0)'">
+        <p style="margin: 0; color: white; font-weight: bold;">All Books</p>
+        <span style="margin-left: 8px; transition: transform 0.3s ease; font-size: 22px; font-weight: bold; color: white;">➜</span>
+    </div>
+</a>
+<br>
+
+                    <form method="post" enctype="multipart/form-data" action="{% url 'book'  %}">
+                        {% csrf_token %}
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label for="id_title" class="form-label" style="color: #003087; font-weight: 500;">Title</label>
+                                <input type="text" id="id_title" name="title" maxlength="50" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_author_id" class="form-label" style="color: #003087; font-weight: 500;">Author</label>
+                                <select id="id_author_id" name="author_id" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                                    {% comment %} <option value="" selected hidden>Select an author</option> {% endcomment %}
+                                    {% for i in auth %}
+                                    <option value="{{i.id}}">{{i.first_name}}</option>
+                                    {% endfor %}
+                                  
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_publisher_id" class="form-label" style="color: #003087; font-weight: 500;">Publisher</label>
+                                <select id="id_publisher_id" name="publisher_id" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';">
+                               
+                                    {% comment %} <option value="" selected hidden>Select a publisher</option> {% endcomment %}
+                                     {% for i in pub %}
+                                       <option value="{{i.id}}">{{i.name}}</option>
+                                     {% endfor %}
+                                
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_publication_date" class="form-label" style="color: #003087; font-weight: 500;">Publication Date</label>
+                                <input type="date" id="id_publication_date" name="publication_date" class="form-control" required style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_isbn" class="form-label" style="color: #003087; font-weight: 500;">ISBN</label>
+                                <input type="text" id="id_isbn" name="isbn" maxlength="13" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_genre" class="form-label" style="color: #003087; font-weight: 500;">Genre</label>
+                                <input type="text" id="id_genre" name="genre" maxlength="50" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_price" class="form-label" style="color: #003087; font-weight: 500;">Price</label>
+                                <input type="number" id="id_price" name="price" step="0.01" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_pages" class="form-label" style="color: #003087; font-weight: 500;">Pages</label>
+                                <input type="number" id="id_pages" name="pages" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_language" class="form-label" style="color: #003087; font-weight: 500;">Language</label>
+                                <input type="text" id="id_language" name="language" maxlength="30" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_stock_quantity" class="form-label" style="color: #003087; font-weight: 500;">Stock Quantity</label>
+                                <input type="number" id="id_stock_quantity" name="stock_quantity" class="form-control" value="0" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_cover_image" class="form-label" style="color: #003087; font-weight: 500;">Cover Image</label>
+                                <div style="position: relative;">
+                                    <input type="file" id="id_cover_image" name="cover_image" class="form-control" style="border-radius: 8px; padding: 10px; border: 2px solid #0057b7; background: #e6f0fa; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; opacity: 0;" onfocus="this.style.borderColor='#003087'; this.style.boxShadow='0 0 8px rgba(0, 48, 135, 0.5)';" onblur="this.style.borderColor='#0057b7'; this.style.boxShadow='none';" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';" onchange="this.nextElementSibling.innerText = this.files.length > 0 ? 'File chosen / No file chosen' : 'File chosen / No file chosen';">
+                                    <span id="file-placeholder" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); color: #003087; font-size: 18px; pointer-events: none;">File chosen / No file chosen</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn w-100" style="background: linear-gradient(90deg, #0057b7, #00b7eb); color: #ffffff; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s, background 0.5s;" onmouseover="this.style.background='radial-gradient(circle, #00b7eb, #003087)'; this.style.boxShadow='0 5px 25px rgba(0, 48, 135, 0.5)';" onmouseout="this.style.background='linear-gradient(90deg, #0057b7, #00b7eb)'; this.style.boxShadow='none'; this.style.filter='brightness(1)';">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            animation: backgroundFade 1.5s ease-in-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin: 20px auto;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 1s ease-in-out forwards 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: none;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        th {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+        }
+
+        td {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: rowSlideIn 0.5s ease-in-out forwards;
+        }
+
+        tr:nth-child(1) { animation-delay: 0.5s; }
+        tr:nth-child(2) { animation-delay: 0.6s; }
+        tr:nth-child(3) { animation-delay: 0.7s; }
+        tr:nth-child(4) { animation-delay: 0.8s; }
+        tr:nth-child(5) { animation-delay: 0.9s; }
+
+        tr:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #1e6bb8;
+            text-decoration: underline;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes rowSlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes backgroundFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            tr {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Books</h1>
+        <a href="{% url 'pattern_book_search' %}" style="text-decoration: none;">
+    <div style="display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: #003087; font-size: 18px; cursor: pointer; transition: all 0.3s ease; color: white;"
+         onmouseover="this.children[1].style.transform='translateX(5px)'"
+         onmouseout="this.children[1].style.transform='translateX(0)'">
+        <p style="margin: 0; color: white; font-weight: bold;">Search Books </p>
+        <span style="margin-left: 8px; transition: transform 0.3s ease; font-size: 22px; font-weight: bold; color: white;">➜</span>
+    </div>
+</a>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author Name</th>
+                <th>Publisher Name</th>
+                <th>Publication Date</th>
+            </tr>
+            {% for book in sabhi_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author_id }}</td>
+                <td>
+                    <a href="{% url 'pub_detail' book.publisher_id.id %}">{{ book.publisher_id.name }}</a>
+                </td>
+                <td>{{ book.publication_date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+
+{% endblock %}
+
+{% comment %} <table>
+<tr>
+<th style="border:2px solid black">Title</th>
+<th style="border:2px solid black">Author_Name</th>
+<th style="border:2px solid black">Publisher_Name</th>
+<th style="border:2px solid black">Publication_Date</th>
+</tr>
+
+{% for book in sabhi_books %}
+<tr>
+<td style="border:2px solid black"> {{book.title}} </td>
+<td style="border:2px solid black"> {{book.author_id}} </td>
+<td style="border:2px solid black"> 
+<a href="{%url 'pub_detail' book.publisher_id %}">{{book.publisher_id.name}}</a>
+</td>
+<td style="border:2px solid black"> {{book.publication_date}} </td>
+</tr>
+{% endfor %}
+</table> {% endcomment %}
